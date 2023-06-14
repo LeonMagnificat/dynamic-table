@@ -5,6 +5,8 @@ import Container from "@mui/material/Container";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import TopNavBar from "./TopNavBar";
+import TableData from "./TableData";
+import BreadCrumbs from "./BreadCrumbs";
 
 const MainBox = styled(Box)({
   backgroundColor: "#fff",
@@ -28,6 +30,8 @@ export default function Mainframe() {
       <MainBoxContainer maxWidth="xxl">
         <MainBox>
           <TopNavBar />
+          <BreadCrumbs />
+          <TableData />
         </MainBox>
       </MainBoxContainer>
     </React.Fragment>

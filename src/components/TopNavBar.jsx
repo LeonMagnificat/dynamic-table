@@ -18,10 +18,11 @@ const CustomAppBar = styled(AppBar)(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
   borderBottom: "solid 1px #F1F2F6",
+  marginBlockEnd: "15px",
 }));
 
 const LogoImage = styled("img")({
-  height: 30, // Set the desired height of the logo
+  height: 25, // Set the desired height of the logo
   marginRight: 10, // Adjust the margin if needed
 });
 
@@ -70,28 +71,30 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function TopNavBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <CustomAppBar position="static">
-        <Toolbar>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-          >
-            <LogoImage src={Logo} alt="Custom Logo" />
-          </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
-        </Toolbar>
-      </CustomAppBar>
-    </Box>
+    <>
+      <Box sx={{ flexGrow: 1 }}>
+        <CustomAppBar position="static">
+          <Toolbar>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            >
+              <LogoImage src={Logo} alt="Custom Logo" />
+            </Typography>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
+          </Toolbar>
+        </CustomAppBar>
+      </Box>
+    </>
   );
 }
