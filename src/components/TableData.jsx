@@ -14,6 +14,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "transparent",
     color: "#B1B1B1",
+    width: "25%",
     borderBottom: "none",
   },
   [`&.${tableCellClasses.body}`]: {
@@ -24,11 +25,18 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 export default function TableData() {
   return (
     <>
-      <Box sx={{ marginBlock: "40px" }}>
+      <Box sx={{ marginBlock: "15px" }}>
         <Typography sx={{ fontSize: "2em" }}>Nominated Books</Typography>
         <Typography>18 total books</Typography>
       </Box>
-      <TableContainer component={Paper} sx={{ boxShadow: "none" }}>
+      <TableContainer
+        component={Paper}
+        sx={{
+          boxShadow: "none",
+          maxHeight: "calc(75vh - 150px)",
+          overflow: "auto",
+        }}
+      >
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>

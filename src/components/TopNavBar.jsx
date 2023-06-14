@@ -14,7 +14,7 @@ const CustomAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: "transparent",
   boxShadow: "none",
   borderRadius: "30px 30px 0 0",
-  height: "100px",
+  height: "70px",
   display: "flex",
   justifyContent: "center",
   borderBottom: "solid 1px #F1F2F6",
@@ -22,8 +22,8 @@ const CustomAppBar = styled(AppBar)(({ theme }) => ({
 }));
 
 const LogoImage = styled("img")({
-  height: 25, // Set the desired height of the logo
-  marginRight: 10, // Adjust the margin if needed
+  height: 25,
+  marginRight: 10,
 });
 
 const Search = styled("div")(({ theme }) => ({
@@ -38,7 +38,7 @@ const Search = styled("div")(({ theme }) => ({
   marginLeft: 0,
   width: "100%",
   [theme.breakpoints.up("md")]: {
-    marginLeft: theme.spacing(1),
+    marginLeft: theme.spacing(0),
     width: "auto",
   },
 }));
@@ -75,14 +75,19 @@ export default function TopNavBar() {
       <Box sx={{ flexGrow: 1 }}>
         <CustomAppBar position="static">
           <Toolbar>
-            <Typography
+            <Box
               variant="h6"
               noWrap
               component="div"
-              sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+              sx={{
+                flexGrow: 1,
+
+                alignItems: "center",
+                display: { xs: "none", sm: "flex" },
+              }}
             >
               <LogoImage src={Logo} alt="Custom Logo" />
-            </Typography>
+            </Box>
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />

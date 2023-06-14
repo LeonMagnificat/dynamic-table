@@ -30,8 +30,10 @@ export default function Mainframe() {
       <MainBoxContainer maxWidth="xxl">
         <MainBox>
           <TopNavBar />
-          <BreadCrumbs />
-          <TableData />
+          <Box sx={{ paddingInline: "16px" }}>
+            <BreadCrumbs />
+            <TableData />
+          </Box>
         </MainBox>
       </MainBoxContainer>
     </React.Fragment>
