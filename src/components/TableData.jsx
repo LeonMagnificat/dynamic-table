@@ -12,10 +12,13 @@ import TableRowItem from "./TableRowItem";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "transparent",
+    backgroundColor: "#fff",
     color: "#B1B1B1",
     width: "25%",
     borderBottom: "none",
+    position: "sticky",
+    top: 0,
+    zIndex: "1",
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -33,7 +36,7 @@ export default function TableData() {
         component={Paper}
         sx={{
           boxShadow: "none",
-          maxHeight: "calc(75vh - 150px)",
+          maxHeight: "calc(85vh - 150px)",
           overflow: "auto",
         }}
       >
