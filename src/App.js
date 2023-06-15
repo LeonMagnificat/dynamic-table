@@ -1,11 +1,16 @@
 import "./App.css";
+import BookDetails from "./components/BookDetails";
 import Mainframe from "./components/Mainframe";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import TopNavBar from "./components/TopNavBar";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <Mainframe />
+      <Routes>
+        <Route path="/home" Component={Mainframe} />
+        <Route path="/book" Component={BookDetails} />
+      </Routes>
     </>
   );
 }
