@@ -1,13 +1,11 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
-import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
+import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import { Box, Typography, Button } from "@mui/material";
+import { getBooks } from "../redux/actions";
+import { useDispatch } from "react-redux";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   borderBottom: "none",
@@ -199,6 +197,7 @@ const rows = [
 ];
 
 export default function TableRowItem() {
+  const dispatch = useDispatch();
   return (
     <TableBody>
       {rows.map((row) => (
@@ -227,6 +226,9 @@ export default function TableRowItem() {
               variant="contained"
               href="#"
               sx={{ color: "#fff", textTransform: "capitalize" }}
+              onClick={() => {
+                dispatch(getBooks());
+              }}
             >
               Buy
             </Button>

@@ -3,7 +3,6 @@ import { styled } from "@mui/system";
 import React from "react";
 import TopNavBar from "./TopNavBar";
 import BreadCrumbs from "./BreadCrumbs";
-import TableData from "./TableData";
 import BookDetailsPage from "./BookDetailsPage";
 
 const MainBox = styled(Box)({
@@ -21,7 +20,7 @@ const MainBoxContainer = styled(Container)({
   justifyContent: "center",
 });
 
-function BookDetails() {
+export default function BookDetails() {
   return (
     <React.Fragment>
       <CssBaseline />
@@ -37,5 +36,3 @@ function BookDetails() {
     </React.Fragment>
   );
 }
-
-export default BookDetails;

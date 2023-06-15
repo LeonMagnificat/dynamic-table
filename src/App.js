@@ -1,7 +1,6 @@
 import "./App.css";
 import BookDetails from "./components/BookDetails";
 import Mainframe from "./components/Mainframe";
-import TopNavBar from "./components/TopNavBar";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
