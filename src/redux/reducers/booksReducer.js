@@ -10,7 +10,7 @@ const booksReducer = (state = initialState, action) => {
     case GET_BOOKS:
       return {
         ...state,
-        books: [...state.books, action.payload],
+        books: action.payload,
       };
     case SET_CLICKED_BOOK:
       return {

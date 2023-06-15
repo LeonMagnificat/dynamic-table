@@ -5,7 +5,7 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { Box, Typography, Button } from "@mui/material";
 import { getBooks } from "../redux/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   borderBottom: "none",
@@ -43,199 +43,86 @@ const BookTitleCell = styled(Box)(({ theme }) => ({
 const Image = styled("img")({
   height: "100%",
   width: "100%",
+  objectFit: "cover",
+  borderRadius: "10%",
 });
-
-function createData(name, calories, fat, carbs, protein, cover) {
-  return { name, calories, fat, carbs, protein, cover };
-}
-
-const rows = [
-  createData(
-    "Frozen yoghurt",
-    "Darlene Robertson",
-    6.0,
-    24,
-    4.0,
-    "https://marketplace.canva.com/EAFA7N_NLQs/1/0/1003w/canva-cute-colorful-watercolor-simple-illustrated-young-adult-romance-book-cover-ooKN90UU-H0.jpg"
-  ),
-  createData(
-    "Ice cream sandwich",
-    "Aby Kijun",
-    9.0,
-    37,
-    4.3,
-    "https://marketplace.canva.com/EAFDuQrsi9c/1/0/1003w/canva-cute-green-illustrated-simple-summer-love-romance-book-cover-GP4zLi65S6U.jpg"
-  ),
-  createData(
-    "Eclair",
-    "Ryan Guti",
-    16.0,
-    24,
-    6.0,
-    "https://marketplace.canva.com/EAFJWW8enyg/1/0/1003w/canva-pink-minimalist-korean-book-cover-izfZ0bh7vFM.jpg"
-  ),
-  createData(
-    "Cupcake",
-    "South way",
-    3.7,
-    67,
-    4.3,
-    "https://marketplace.canva.com/EAFb0edAOFc/1/0/1003w/canva-dark-blue-simple-illustration-dramatic-story-book-cover-zOo1YmiHsGw.jpg"
-  ),
-  createData(
-    "Gingerbread",
-    "Darlene Robertson",
-    16.0,
-    49,
-    3.9,
-    "https://marketplace.canva.com/EAFczmjh0iw/2/0/1024w/canva-purple-and-dark-blue-illustrative-spring-day-wattpad-book-cover-bgALYz8Y6JE.jpg"
-  ),
-  createData(
-    "Gingerbread",
-    "Darlene Robertson",
-    16.0,
-    49,
-    3.9,
-    "https://marketplace.canva.com/EAFczmjh0iw/2/0/1024w/canva-purple-and-dark-blue-illustrative-spring-day-wattpad-book-cover-bgALYz8Y6JE.jpg"
-  ),
-  createData(
-    "Gingerbread",
-    "Darlene Robertson",
-    16.0,
-    49,
-    3.9,
-    "https://marketplace.canva.com/EAFczmjh0iw/2/0/1024w/canva-purple-and-dark-blue-illustrative-spring-day-wattpad-book-cover-bgALYz8Y6JE.jpg"
-  ),
-  createData(
-    "Gingerbread",
-    "Darlene Robertson",
-    16.0,
-    49,
-    3.9,
-    "https://marketplace.canva.com/EAFczmjh0iw/2/0/1024w/canva-purple-and-dark-blue-illustrative-spring-day-wattpad-book-cover-bgALYz8Y6JE.jpg"
-  ),
-  createData(
-    "Gingerbread",
-    "Darlene Robertson",
-    16.0,
-    49,
-    3.9,
-    "https://marketplace.canva.com/EAFczmjh0iw/2/0/1024w/canva-purple-and-dark-blue-illustrative-spring-day-wattpad-book-cover-bgALYz8Y6JE.jpg"
-  ),
-  createData(
-    "Gingerbread",
-    "Darlene Robertson",
-    16.0,
-    49,
-    3.9,
-    "https://marketplace.canva.com/EAFczmjh0iw/2/0/1024w/canva-purple-and-dark-blue-illustrative-spring-day-wattpad-book-cover-bgALYz8Y6JE.jpg"
-  ),
-  createData(
-    "Gingerbread",
-    "Darlene Robertson",
-    16.0,
-    49,
-    3.9,
-    "https://marketplace.canva.com/EAFczmjh0iw/2/0/1024w/canva-purple-and-dark-blue-illustrative-spring-day-wattpad-book-cover-bgALYz8Y6JE.jpg"
-  ),
-  createData(
-    "Gingerbread",
-    "Darlene Robertson",
-    16.0,
-    49,
-    3.9,
-    "https://marketplace.canva.com/EAFczmjh0iw/2/0/1024w/canva-purple-and-dark-blue-illustrative-spring-day-wattpad-book-cover-bgALYz8Y6JE.jpg"
-  ),
-  createData(
-    "Gingerbread",
-    "Darlene Robertson",
-    16.0,
-    49,
-    3.9,
-    "https://marketplace.canva.com/EAFczmjh0iw/2/0/1024w/canva-purple-and-dark-blue-illustrative-spring-day-wattpad-book-cover-bgALYz8Y6JE.jpg"
-  ),
-  createData(
-    "Gingerbread",
-    "Darlene Robertson",
-    16.0,
-    49,
-    3.9,
-    "https://marketplace.canva.com/EAFczmjh0iw/2/0/1024w/canva-purple-and-dark-blue-illustrative-spring-day-wattpad-book-cover-bgALYz8Y6JE.jpg"
-  ),
-  createData(
-    "Gingerbread",
-    "Darlene Robertson",
-    16.0,
-    49,
-    3.9,
-    "https://marketplace.canva.com/EAFczmjh0iw/2/0/1024w/canva-purple-and-dark-blue-illustrative-spring-day-wattpad-book-cover-bgALYz8Y6JE.jpg"
-  ),
-  createData(
-    "Gingerbread",
-    "Darlene Robertson",
-    16.0,
-    49,
-    3.9,
-    "https://marketplace.canva.com/EAFczmjh0iw/2/0/1024w/canva-purple-and-dark-blue-illustrative-spring-day-wattpad-book-cover-bgALYz8Y6JE.jpg"
-  ),
-  createData(
-    "Gingerbread",
-    "Darlene Robertson",
-    16.0,
-    49,
-    3.9,
-    "https://marketplace.canva.com/EAFczmjh0iw/2/0/1024w/canva-purple-and-dark-blue-illustrative-spring-day-wattpad-book-cover-bgALYz8Y6JE.jpg"
-  ),
-  createData(
-    "Gingerbread",
-    "Darlene Robertson",
-    16.0,
-    49,
-    3.9,
-    "https://marketplace.canva.com/EAFczmjh0iw/2/0/1024w/canva-purple-and-dark-blue-illustrative-spring-day-wattpad-book-cover-bgALYz8Y6JE.jpg"
-  ),
-];
 
 export default function TableRowItem() {
   const dispatch = useDispatch();
+  const booksCollection = useSelector((state) => state.books.books);
+  console.log("booksCollection", booksCollection);
+
+  React.useEffect(() => {
+    dispatch(getBooks());
+  }, []);
+
   return (
     <TableBody>
-      {rows.map((row) => (
-        <StyledTableRow key={row.name} sx={{}}>
-          <StyledTableCell component="th" scope="row">
-            <BookTitleCell>
-              <Box
-                sx={{
-                  width: "30px",
-                  height: "35px",
-                  marginInlineEnd: "10px",
-                }}
-              >
-                <Image src={row.cover} alt="Custom Logo" />
-              </Box>
-              <Typography sx={{ fontSize: "1.15em", fontWeight: "bold" }}>
-                {row.name}
-              </Typography>
-            </BookTitleCell>
-          </StyledTableCell>
-          <StyledTableCell align="left">{row.calories}</StyledTableCell>
-          <StyledTableCell align="left">{row.fat}</StyledTableCell>
-          <StyledTableCell align="left">
-            <Button
-              color="primary"
-              variant="contained"
-              href="#"
-              sx={{ color: "#fff", textTransform: "capitalize" }}
-              onClick={() => {
-                dispatch(getBooks());
-              }}
-            >
-              Buy
-            </Button>
-          </StyledTableCell>
-          <StyledTableCell align="left">{row.protein}</StyledTableCell>
-        </StyledTableRow>
-      ))}
+      {booksCollection &&
+        booksCollection.map((book) => {
+          console.log(book.volumeInfo.imageLinks);
+          return (
+            <StyledTableRow>
+              <StyledTableCell component="th" scope="row">
+                <BookTitleCell>
+                  <Box
+                    sx={{
+                      minWidth: "30px",
+                      height: "35px",
+                      marginInlineEnd: "10px",
+                    }}
+                  >
+                    {book.volumeInfo.imageLinks &&
+                    book.volumeInfo.imageLinks.thumbnail ? (
+                      <Image
+                        src={book.volumeInfo.imageLinks.thumbnail}
+                        alt="Custom Logo"
+                      />
+                    ) : (
+                      <Image
+                        src={
+                          "https://m.media-amazon.com/images/I/71qEsGzdLYL._AC_UF1000,1000_QL80_.jpg"
+                        }
+                        alt="Custom Logo"
+                      />
+                    )}
+                  </Box>
+                  <Typography sx={{ fontSize: "1.1em", fontWeight: "bold" }}>
+                    {book.volumeInfo.title}
+                  </Typography>
+                </BookTitleCell>
+              </StyledTableCell>
+              <StyledTableCell align="left">
+                {book.volumeInfo.authors &&
+                  book.volumeInfo.authors.map((author) => {
+                    return <Typography>{author}</Typography>;
+                  })}
+              </StyledTableCell>
+              <StyledTableCell align="left">
+                {book.volumeInfo.publisher}
+              </StyledTableCell>
+              <StyledTableCell align="left">
+                {book.volumeInfo.publishedDate}
+              </StyledTableCell>
+              <StyledTableCell align="left">
+                {book.volumeInfo.maturityRating}
+              </StyledTableCell>
+              <StyledTableCell align="left">
+                <Button
+                  color="primary"
+                  variant="contained"
+                  href="#"
+                  sx={{ color: "#fff", textTransform: "capitalize" }}
+                  onClick={() => {
+                    dispatch(getBooks());
+                  }}
+                >
+                  Buy
+                </Button>
+              </StyledTableCell>
+            </StyledTableRow>
+          );
+        })}
     </TableBody>
   );
 }

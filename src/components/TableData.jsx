@@ -8,12 +8,13 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Box, Typography } from "@mui/material";
 import TableRowItem from "./TableRowItem";
+import { useSelector } from "react-redux";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "#fff",
     color: "#B1B1B1",
-    width: "25%",
+    width: "20%",
     borderBottom: "none",
     position: "sticky",
     top: 0,
@@ -25,11 +26,14 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 export default function TableData() {
+  const booksCollection = useSelector((state) => state.books.books);
   return (
     <>
       <Box sx={{ marginBlock: "15px" }}>
         <Typography sx={{ fontSize: "2em" }}>Nominated Books</Typography>
-        <Typography>18 total books</Typography>
+        <Typography>
+          {booksCollection && booksCollection.length} books
+        </Typography>
       </Box>
       <TableContainer
         component={Paper}
@@ -44,9 +48,10 @@ export default function TableData() {
             <TableRow>
               <StyledTableCell>Book Title</StyledTableCell>
               <StyledTableCell align="left">Author</StyledTableCell>
-              <StyledTableCell align="left">ID</StyledTableCell>
-              <StyledTableCell align="left">Action</StyledTableCell>
-              <StyledTableCell align="left">Votes</StyledTableCell>
+              <StyledTableCell align="left">Publisher</StyledTableCell>
+              <StyledTableCell align="left">Published Date</StyledTableCell>
+              <StyledTableCell align="left">Maturity Rating</StyledTableCell>
+              <StyledTableCell align="left">Purchase</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableRowItem />
