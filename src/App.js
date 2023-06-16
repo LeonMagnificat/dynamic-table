@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/home" Component={Mainframe} />
+        <Route path="/books" Component={Mainframe} />
         <Route path="/details/:bookId" Component={BookDetails} />
       </Routes>
     </>

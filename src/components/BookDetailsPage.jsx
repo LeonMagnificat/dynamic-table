@@ -55,12 +55,27 @@ export default function BookDetailsPage() {
       <BookDetailsBox>
         <Box
           sx={{
-            width: "320px",
-            height: "430px",
+            width: "330px",
+            height: "350px",
             marginInlineEnd: "30px",
           }}
         >
-          <Image src="https://marketplace.canva.com/EAFA7N_NLQs/1/0/1003w/canva-cute-colorful-watercolor-simple-illustrated-young-adult-romance-book-cover-ooKN90UU-H0.jpg" />
+          {clickedBookData &&
+          clickedBookData.volumeInfo &&
+          clickedBookData.volumeInfo.imageLinks &&
+          clickedBookData.volumeInfo.imageLinks.thumbnail ? (
+            <Image
+              src={clickedBookData.volumeInfo.imageLinks.thumbnail}
+              alt="Custom Logo"
+            />
+          ) : (
+            <Image
+              src={
+                "https://m.media-amazon.com/images/I/71qEsGzdLYL._AC_UF1000,1000_QL80_.jpg"
+              }
+              alt="Custom Logo"
+            />
+          )}
         </Box>
         <Box>
           <BookTextBox>
