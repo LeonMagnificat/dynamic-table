@@ -4,8 +4,9 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { Box, Typography, Button } from "@mui/material";
-import { getBooks } from "../redux/actions";
+import { getBooks, saveBookId } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   borderBottom: "none",
@@ -14,7 +15,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
+    backgroundColor: "#fafafa;",
     cursor: "pointer",
     transition: "ease .5s",
     borderBottom: "none",
@@ -49,8 +50,14 @@ const Image = styled("img")({
 
 export default function TableRowItem() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const booksCollection = useSelector((state) => state.books.books);
   console.log("booksCollection", booksCollection);
+
+  const handleBookDetails = (bookId) => {
+    const linkUrl = `/details/${bookId}`;
+    navigate(linkUrl);
+  };
 
   React.useEffect(() => {
     dispatch(getBooks());
@@ -62,7 +69,13 @@ export default function TableRowItem() {
         booksCollection.map((book) => {
           console.log(book.volumeInfo.imageLinks);
           return (
-            <StyledTableRow>
+            <StyledTableRow
+              key={book.id}
+              onClick={() => {
+                handleBookDetails(book.id);
+                console.log(book.id);
+              }}
+            >
               <StyledTableCell component="th" scope="row">
                 <BookTitleCell>
                   <Box
@@ -87,20 +100,37 @@ export default function TableRowItem() {
                       />
                     )}
                   </Box>
-                  <Typography sx={{ fontSize: "1.1em", fontWeight: "bold" }}>
+                  <Typography
+                    sx={{
+                      fontSize: "1.1em",
+                      fontWeight: "bold",
+                      maxWidth: "300px",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                    }}
+                  >
                     {book.volumeInfo.title}
                   </Typography>
                 </BookTitleCell>
               </StyledTableCell>
               <StyledTableCell align="left">
-                {book.volumeInfo.authors &&
+                {book.volumeInfo.authors ? (
                   book.volumeInfo.authors.map((author) => {
                     return <Typography>{author}</Typography>;
-                  })}
+                  })
+                ) : (
+                  <Typography>---</Typography>
+                )}
               </StyledTableCell>
-              <StyledTableCell align="left">
-                {book.volumeInfo.publisher}
-              </StyledTableCell>
+              {book.volumeInfo.publisher ? (
+                <StyledTableCell align="left">
+                  {book.volumeInfo.publisher}
+                </StyledTableCell>
+              ) : (
+                <StyledTableCell align="left">---</StyledTableCell>
+              )}
+
               <StyledTableCell align="left">
                 {book.volumeInfo.publishedDate}
               </StyledTableCell>
@@ -111,11 +141,18 @@ export default function TableRowItem() {
                 <Button
                   color="primary"
                   variant="contained"
-                  href="#"
-                  sx={{ color: "#fff", textTransform: "capitalize" }}
-                  onClick={() => {
-                    dispatch(getBooks());
+                  href={
+                    book.saleInfo.buyLink
+                      ? book.saleInfo.buyLink
+                      : book.volumeInfo.previewLink
+                  }
+                  sx={{
+                    color: "#fff",
+                    textTransform: "capitalize",
+                    boxShadow: "none",
                   }}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Buy
                 </Button>

@@ -2,6 +2,9 @@ import * as React from "react";
 import { styled } from "@mui/material/styles";
 import { Box, Typography, Button } from "@mui/material";
 import OtherBookItem from "./OtherBookItem";
+import { useDispatch, useSelector } from "react-redux";
+import { getBookById } from "../redux/actions";
+import { useParams } from "react-router-dom";
 
 const BookDetailsBox = styled(Box)({
   display: "flex",
@@ -28,6 +31,22 @@ const BookDetailsMainText = styled(Typography)({
 });
 
 export default function BookDetailsPage() {
+  const dispatch = useDispatch();
+  const { bookId } = useParams();
+  const clickedBookData = useSelector((state) => state.books.clickedBook);
+
+  React.useEffect(() => {
+    dispatch(getBookById(bookId));
+    console.log("bookId", bookId);
+  }, []);
+
+  const removeTags = (html) => {
+    const sampleElement = document.createElement("div");
+    sampleElement.innerHTML = html;
+    return sampleElement.textContent || sampleElement.innerText || "";
+  };
+
+  console.log("clickedBookDataaaaaa", clickedBookData);
   return (
     <Box>
       <Box sx={{ marginBlock: "15px" }}>
@@ -46,24 +65,35 @@ export default function BookDetailsPage() {
         <Box>
           <BookTextBox>
             <BookDetailsTitle>Book Title:</BookDetailsTitle>
-            <BookDetailsMainText>Nominated Books</BookDetailsMainText>
+            <BookDetailsMainText>
+              {clickedBookData &&
+                clickedBookData.volumeInfo &&
+                clickedBookData.volumeInfo.title}
+            </BookDetailsMainText>
           </BookTextBox>
           <BookTextBox>
             <BookDetailsTitle>Author:</BookDetailsTitle>
-            <BookDetailsMainText>Nominated Books</BookDetailsMainText>
+            {clickedBookData &&
+            clickedBookData.volumeInfo &&
+            clickedBookData.volumeInfo.authors ? (
+              clickedBookData.volumeInfo.authors.map((author, index) => (
+                <BookDetailsMainText key={index}>{author}</BookDetailsMainText>
+              ))
+            ) : (
+              <Typography>---</Typography>
+            )}
           </BookTextBox>
           <BookTextBox>
             <BookDetailsTitle>Description:</BookDetailsTitle>
             <BookDetailsMainText>
-              Set in the 1920s, 'The Great Gatsby' is a classic American novel
-              that explores themes of wealth, love, and the pursuit of the
-              American Dream. The story follows Jay Gatsby, a mysterious and
-              wealthy man, and his infatuation with the beautiful and married
-              Daisy Buchanan. Through the eyes of the narrator, Nick Carraway,
-              we witness the extravagance and excess of the Jazz Age, as well as
-              the disillusionment and moral decay that lie beneath the surface.
+              {clickedBookData &&
+              clickedBookData.volumeInfo &&
+              clickedBookData.volumeInfo.description
+                ? removeTags(clickedBookData.volumeInfo.description)
+                : "No description available"}
             </BookDetailsMainText>
           </BookTextBox>
+
           <BookTextBox>
             <Button
               color="primary"
@@ -77,6 +107,7 @@ export default function BookDetailsPage() {
                 boxShadow: "none",
                 marginInlineEnd: "15px",
               }}
+              onClick={() => {}}
             >
               Buy
             </Button>

@@ -1,7 +1,8 @@
-import { GET_BOOKS, SET_CLICKED_BOOK } from "../actions";
+import { GET_BOOKS, SET_CLICKED_BOOK, GET_CLICKED_BOOK_ID } from "../actions";
 
 const initialState = {
   books: [],
+  clickedBookId: null,
   clickedBook: null,
 };
 
@@ -11,6 +12,11 @@ const booksReducer = (state = initialState, action) => {
       return {
         ...state,
         books: action.payload,
+      };
+    case GET_CLICKED_BOOK_ID:
+      return {
+        ...state,
+        clickedBookId: action.payload,
       };
     case SET_CLICKED_BOOK:
       return {
