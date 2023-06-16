@@ -7,28 +7,78 @@ const Image = styled("img")({
   minWidth: "100%",
   objectFit: "cover",
   borderRadius: "20px",
+  transition: "ease .4s",
+});
+const OtherBook = styled(Box)({
+  cursor: "pointer",
+  "&:hover": {
+    opacity: "90%",
+    transform: "scale(1.0125)",
+    transition: "ease .4s",
+  },
 });
 
-export default function OtherBookItem() {
+export default function OtherBookItem({ otherBook }) {
   return (
-    <Box>
-      <Box>
-        <Box>
-          <Box
-            sx={{
-              width: "120px",
-              height: "150px",
-              marginInlineEnd: "30px",
-            }}
-          >
-            <Image src="https://marketplace.canva.com/EAFA7N_NLQs/1/0/1003w/canva-cute-colorful-watercolor-simple-illustrated-young-adult-romance-book-cover-ooKN90UU-H0.jpg" />
-          </Box>
-          <Box>
-            <Typography>Title</Typography>
-            <Typography>Title 02</Typography>
-          </Box>
-        </Box>
+    <OtherBook>
+      <Box
+        sx={{
+          width: "120px",
+          height: "150px",
+          marginInlineEnd: "30px",
+          border: "1px #d0d0d0 solid",
+          borderRadius: "20px",
+        }}
+      >
+        {otherBook &&
+        otherBook.volumeInfo &&
+        otherBook.volumeInfo.imageLinks &&
+        otherBook.volumeInfo.imageLinks.thumbnail ? (
+          <Image
+            src={otherBook.volumeInfo.imageLinks.thumbnail}
+            alt="Custom Logo"
+          />
+        ) : (
+          <Image
+            src={
+              "https://m.media-amazon.com/images/I/71qEsGzdLYL._AC_UF1000,1000_QL80_.jpg"
+            }
+            alt="Custom Logo"
+          />
+        )}
       </Box>
-    </Box>
+      <Box sx={{ marginBlockStart: "20px" }}>
+        <Typography
+          sx={{
+            fontSize: "16px",
+            fontWeight: "bold",
+            width: "130px",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+        >
+          {otherBook && otherBook.volumeInfo && otherBook.volumeInfo.title}
+        </Typography>
+        {otherBook && otherBook.volumeInfo && otherBook.volumeInfo.authors ? (
+          otherBook.volumeInfo.authors.map((author, index) => (
+            <Typography
+              key={index}
+              sx={{
+                fontSize: "13px",
+                width: "130px",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              -{author}
+            </Typography>
+          ))
+        ) : (
+          <Typography>---</Typography>
+        )}
+      </Box>
+    </OtherBook>
   );
 }

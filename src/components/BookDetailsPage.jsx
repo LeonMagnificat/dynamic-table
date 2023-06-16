@@ -34,6 +34,7 @@ export default function BookDetailsPage() {
   const dispatch = useDispatch();
   const { bookId } = useParams();
   const clickedBookData = useSelector((state) => state.books.clickedBook);
+  const booksCollection = useSelector((state) => state.books.books);
 
   React.useEffect(() => {
     dispatch(getBookById(bookId));
@@ -148,23 +149,10 @@ export default function BookDetailsPage() {
           <Typography sx={{ fontSize: "2em" }}>Other Books</Typography>
         </Box>
         <Box sx={{ display: "flex", overflowX: "auto" }}>
-          <OtherBookItem />
-          <OtherBookItem />
-          <OtherBookItem />
-          <OtherBookItem />
-          <OtherBookItem />
-          <OtherBookItem />
-          <OtherBookItem />
-          <OtherBookItem />
-          <OtherBookItem />
-          <OtherBookItem />
-          <OtherBookItem />
-          <OtherBookItem />
-          <OtherBookItem />
-          <OtherBookItem />
-          <OtherBookItem />
-          <OtherBookItem />
-          <OtherBookItem />
+          {booksCollection &&
+            booksCollection.map((otherBook) => {
+              return <OtherBookItem otherBook={otherBook} />;
+            })}
         </Box>
       </Box>
     </Box>
