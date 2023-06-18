@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Tooltip } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getBookById } from "../../redux/actions";
@@ -51,14 +51,16 @@ export default function OtherBookItem({ otherBook }) {
         </OtherBookText>
         {otherBook && otherBook.volumeInfo && otherBook.volumeInfo.authors ? (
           otherBook.volumeInfo.authors.map((author, index) => (
-            <OtherBookText
-              key={index}
-              sx={{
-                fontSize: "13px",
-              }}
-            >
-              -{author}
-            </OtherBookText>
+            <Tooltip title={`${otherBook.volumeInfo.title} - ${author}`}>
+              <OtherBookText
+                key={index}
+                sx={{
+                  fontSize: "13px",
+                }}
+              >
+                - {author}
+              </OtherBookText>
+            </Tooltip>
           ))
         ) : (
           <Typography>---</Typography>

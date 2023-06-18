@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import OtherBookItem from "./OtherBookItem";
 import { useDispatch, useSelector } from "react-redux";
 import { getBookById } from "../../redux/actions";
@@ -15,8 +15,10 @@ import {
   DetailTextContainer,
   LongBuyButton,
 } from "./Details-lib-style";
+import { Height } from "@mui/icons-material";
 
 export default function BookDetailsPage() {
+  const theme = useTheme();
   const dispatch = useDispatch();
   const { bookId } = useParams();
   const clickedBookData = useSelector((state) => state.books.clickedBook);
@@ -36,8 +38,21 @@ export default function BookDetailsPage() {
             clickedBookData.volumeInfo.title}
         </Typography>
       </Box>
-      <BookDetailsBox>
-        <ImageBox>
+      <BookDetailsBox
+        sx={{
+          [theme.breakpoints.down("sm")]: {
+            flexDirection: "column",
+            justifyContent: "space-between",
+          },
+        }}
+      >
+        <ImageBox
+          sx={{
+            [theme.breakpoints.down("sm")]: {
+              marginInlineEnd: "0px",
+            },
+          }}
+        >
           {clickedBookData &&
           clickedBookData.volumeInfo &&
           clickedBookData.volumeInfo.imageLinks &&
@@ -53,7 +68,14 @@ export default function BookDetailsPage() {
             />
           )}
         </ImageBox>
-        <DetailTextContainer>
+        <DetailTextContainer
+          sx={{
+            [theme.breakpoints.down("sm")]: {
+              height: "25vh",
+              marginBlockStart: "20px",
+            },
+          }}
+        >
           <BookTextBox>
             <BookDetailsTitle>Book Title:</BookDetailsTitle>
             <BookDetailsMainText>
@@ -76,7 +98,13 @@ export default function BookDetailsPage() {
           </BookTextBox>
           <BookTextBox>
             <BookDetailsTitle>Description:</BookDetailsTitle>
-            <BookDetailsMainText>
+            <BookDetailsMainText
+              sx={{
+                [theme.breakpoints.down("sm")]: {
+                  width: "100%",
+                },
+              }}
+            >
               {clickedBookData &&
               clickedBookData.volumeInfo &&
               clickedBookData.volumeInfo.description
@@ -90,7 +118,11 @@ export default function BookDetailsPage() {
               color="primary"
               variant="contained"
               href="#"
-              onClick={() => {}}
+              sx={{
+                [theme.breakpoints.down("sm")]: {
+                  width: "100%",
+                },
+              }}
             >
               Buy
             </LongBuyButton>
@@ -100,6 +132,9 @@ export default function BookDetailsPage() {
               href="#"
               sx={{
                 color: "#50ADBB",
+                [theme.breakpoints.down("sm")]: {
+                  width: "100%",
+                },
               }}
             >
               Share
