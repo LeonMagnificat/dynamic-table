@@ -1,34 +1,20 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import OtherBookItem from "./OtherBookItem";
 import { useDispatch, useSelector } from "react-redux";
-import { getBookById } from "../redux/actions";
+import { getBookById } from "../../redux/actions";
 import { useParams } from "react-router-dom";
-
-const BookDetailsBox = styled(Box)({
-  display: "flex",
-});
-const Image = styled("img")({
-  height: "100%",
-  minWidth: "100%",
-  objectFit: "cover",
-  borderRadius: "20px",
-});
-
-const BookTextBox = styled(Box)({
-  marginBlockEnd: "20px",
-});
-const BookDetailsTitle = styled(Typography)({
-  fontSize: ".9em",
-  color: "#404D61",
-});
-const BookDetailsMainText = styled(Typography)({
-  fontSize: "1.3em",
-  fontWeight: "bold",
-  color: "#404D61",
-  width: "60%",
-});
+import {
+  BookDetailsBox,
+  BookTextBox,
+  BookDetailsMainText,
+  BookDetailsTitle,
+  removeTags,
+  ImageBox,
+  Image,
+  DetailTextContainer,
+  LongBuyButton,
+} from "./Details-lib-style";
 
 export default function BookDetailsPage() {
   const dispatch = useDispatch();
@@ -38,47 +24,36 @@ export default function BookDetailsPage() {
 
   React.useEffect(() => {
     dispatch(getBookById(bookId));
-    console.log("bookId", bookId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const removeTags = (html) => {
-    const sampleElement = document.createElement("div");
-    sampleElement.innerHTML = html;
-    return sampleElement.textContent || sampleElement.innerText || "";
-  };
-
-  console.log("clickedBookDataaaaaa", clickedBookData);
   return (
     <Box>
       <Box sx={{ marginBlock: "15px" }}>
-        <Typography sx={{ fontSize: "2em" }}>Nominated Books</Typography>
+        <Typography sx={{ fontSize: "1.3em" }}>
+          {clickedBookData &&
+            clickedBookData.volumeInfo &&
+            clickedBookData.volumeInfo.title}
+        </Typography>
       </Box>
       <BookDetailsBox>
-        <Box
-          sx={{
-            width: "330px",
-            height: "350px",
-            marginInlineEnd: "30px",
-          }}
-        >
+        <ImageBox>
           {clickedBookData &&
           clickedBookData.volumeInfo &&
           clickedBookData.volumeInfo.imageLinks &&
           clickedBookData.volumeInfo.imageLinks.thumbnail ? (
             <Image
               src={clickedBookData.volumeInfo.imageLinks.thumbnail}
-              alt="Custom Logo"
+              alt="Book Cover "
             />
           ) : (
             <Image
-              src={
-                "https://m.media-amazon.com/images/I/71qEsGzdLYL._AC_UF1000,1000_QL80_.jpg"
-              }
+              src={"https://wallpaperaccess.com/full/1227835.jpg"}
               alt="Custom Logo"
             />
           )}
-        </Box>
-        <Box>
+        </ImageBox>
+        <DetailTextContainer>
           <BookTextBox>
             <BookDetailsTitle>Book Title:</BookDetailsTitle>
             <BookDetailsMainText>
@@ -111,42 +86,30 @@ export default function BookDetailsPage() {
           </BookTextBox>
 
           <BookTextBox>
-            <Button
+            <LongBuyButton
               color="primary"
               variant="contained"
               href="#"
-              sx={{
-                color: "#fff",
-                textTransform: "capitalize",
-                width: "150px",
-                height: "50px",
-                boxShadow: "none",
-                marginInlineEnd: "15px",
-              }}
               onClick={() => {}}
             >
               Buy
-            </Button>
-            <Button
+            </LongBuyButton>
+            <LongBuyButton
               color="primary"
               //   variant="outlined"
               href="#"
               sx={{
                 color: "#50ADBB",
-                textTransform: "capitalize",
-                width: "150px",
-                height: "50px",
-                boxShadow: "none",
               }}
             >
               Share
-            </Button>
+            </LongBuyButton>
           </BookTextBox>
-        </Box>
+        </DetailTextContainer>
       </BookDetailsBox>
       <Box>
         <Box sx={{ marginBlock: "30px" }}>
-          <Typography sx={{ fontSize: "2em" }}>Other Books</Typography>
+          <Typography sx={{ fontSize: "1.3em" }}>Other Books</Typography>
         </Box>
         <Box sx={{ display: "flex", overflowX: "auto" }}>
           {booksCollection &&

@@ -1,79 +1,64 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
 import { Box, Typography } from "@mui/material";
-
-const Image = styled("img")({
-  height: "100%",
-  minWidth: "100%",
-  objectFit: "cover",
-  borderRadius: "20px",
-  transition: "ease .4s",
-});
-const OtherBook = styled(Box)({
-  cursor: "pointer",
-  "&:hover": {
-    opacity: "90%",
-    transform: "scale(1.0125)",
-    transition: "ease .4s",
-  },
-});
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getBookById } from "../../redux/actions";
+import {
+  OtherBook,
+  OtherImageBox,
+  OtherBookText,
+  Image,
+} from "./Details-lib-style";
+import { handleBookDetails } from "../Home-table/Table-lib-style";
 
 export default function OtherBookItem({ otherBook }) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   return (
-    <OtherBook>
-      <Box
-        sx={{
-          width: "120px",
-          height: "150px",
-          marginInlineEnd: "30px",
-          border: "1px #d0d0d0 solid",
-          borderRadius: "20px",
-        }}
-      >
+    <OtherBook
+      onClick={() => {
+        handleBookDetails(otherBook.id, navigate);
+        dispatch(getBookById(otherBook.id));
+      }}
+    >
+      <OtherImageBox>
         {otherBook &&
         otherBook.volumeInfo &&
         otherBook.volumeInfo.imageLinks &&
         otherBook.volumeInfo.imageLinks.thumbnail ? (
           <Image
             src={otherBook.volumeInfo.imageLinks.thumbnail}
-            alt="Custom Logo"
+            alt="Book Image"
           />
         ) : (
           <Image
             src={
               "https://m.media-amazon.com/images/I/71qEsGzdLYL._AC_UF1000,1000_QL80_.jpg"
             }
-            alt="Custom Logo"
+            alt="Book Image"
           />
         )}
-      </Box>
+      </OtherImageBox>
       <Box sx={{ marginBlockStart: "20px" }}>
-        <Typography
+        <OtherBookText
           sx={{
             fontSize: "16px",
             fontWeight: "bold",
-            width: "130px",
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
           }}
         >
           {otherBook && otherBook.volumeInfo && otherBook.volumeInfo.title}
-        </Typography>
+        </OtherBookText>
         {otherBook && otherBook.volumeInfo && otherBook.volumeInfo.authors ? (
           otherBook.volumeInfo.authors.map((author, index) => (
-            <Typography
+            <OtherBookText
               key={index}
               sx={{
                 fontSize: "13px",
-                width: "130px",
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
               }}
             >
               -{author}
-            </Typography>
+            </OtherBookText>
           ))
         ) : (
           <Typography>---</Typography>
