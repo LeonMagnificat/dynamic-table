@@ -15,7 +15,6 @@ import {
   DetailTextContainer,
   LongBuyButton,
 } from "./Details-lib-style";
-import { Height } from "@mui/icons-material";
 
 export default function BookDetailsPage() {
   const theme = useTheme();
