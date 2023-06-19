@@ -47,7 +47,7 @@ export const BookTitleCell = styled(Box)(({ theme }) => ({
 }));
 
 export const ImageBox = styled(Box)({
-  minWidth: "30px",
+  width: "30px",
   height: "35px",
   marginInlineEnd: "10px",
   border: "1px #d0d0d0 solid",
