@@ -44,8 +44,6 @@ export const BookDetailsMainText = styled(Typography)({
   fontWeight: "bold",
   color: "#404D61",
   width: "70%",
-  maxHeight: "90px",
-  overflow: "auto",
 });
 
 export const removeTags = (html) => {

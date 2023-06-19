@@ -15,6 +15,7 @@ import {
   DetailTextContainer,
   LongBuyButton,
 } from "./Details-lib-style";
+import classNames from "classnames";
 
 export default function BookDetailsPage() {
   const theme = useTheme();
@@ -30,7 +31,7 @@ export default function BookDetailsPage() {
 
   return (
     <Box>
-      <Box sx={{ marginBlock: "15px" }}>
+      <Box sx={{ marginBlock: "35px" }}>
         <Typography sx={{ fontSize: "1.3em" }}>
           {clickedBookData &&
             clickedBookData.volumeInfo &&
@@ -103,6 +104,7 @@ export default function BookDetailsPage() {
                   width: "100%",
                 },
               }}
+              className="description"
             >
               {clickedBookData &&
               clickedBookData.volumeInfo &&
@@ -116,7 +118,7 @@ export default function BookDetailsPage() {
             <LongBuyButton
               color="primary"
               variant="contained"
-              href="#"
+              href=""
               sx={{
                 [theme.breakpoints.down("sm")]: {
                   width: "100%",

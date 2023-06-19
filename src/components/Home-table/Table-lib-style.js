@@ -70,6 +70,7 @@ export const BuyButton = styled(Button)({
   color: "#fff",
   textTransform: "capitalize",
   boxShadow: "none",
+  minWidth: "120px",
 });
 
 //---functions

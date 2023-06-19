@@ -11,7 +11,7 @@ export const StyledRouterLink = styled(RouterLink)({
 export const BreadcrumbItem = ({ label, url, isLast, isDetailsPage }) => {
   if (isDetailsPage) {
     return (
-      <Typography sx={{ color: "green" }} key={url}>
+      <Typography sx={{ color: "#50ADBB" }} key={url}>
         {label}
       </Typography>
     );

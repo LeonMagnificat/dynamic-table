@@ -13,16 +13,22 @@ import {
   handleBookDetails,
   BuyButton,
 } from "./Table-lib-style";
+//import classNames from "classnames";
 
 export default function TableRowItem() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const booksCollection = useSelector((state) => state.books.books);
+  const [selectedRow, setSelectedRow] = React.useState(null);
 
   React.useEffect(() => {
     dispatch(getBooks());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleSelectedRow = (bookId) => {
+    setSelectedRow(bookId);
+  };
 
   return (
     <TableBody>
@@ -32,8 +38,17 @@ export default function TableRowItem() {
             <StyledTableRow
               key={book.id}
               onClick={() => {
-                handleBookDetails(book.id, navigate);
+                handleSelectedRow(book.id);
+                // setTimeout(() => {
+                //   handleBookDetails(book.id, navigate);
+                // }, 2000);
               }}
+              sx={{
+                "&:nth-of-type(odd), &:nth-of-type(even)": {
+                  backgroundColor: book.id === selectedRow ? "#DDFBFF" : "",
+                },
+              }}
+              //className={classNames({ highlighted: book.id === selectedRow })}
             >
               <StyledTableCell component="th" scope="row">
                 <BookTitleCell>
@@ -89,15 +104,13 @@ export default function TableRowItem() {
                 <BuyButton
                   color="primary"
                   variant="contained"
-                  href={
-                    book.saleInfo.buyLink
-                      ? book.saleInfo.buyLink
-                      : book.volumeInfo.previewLink
-                  }
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => {
+                    handleBookDetails(book.id, navigate);
+                  }}
                 >
-                  Buy
+                  View Details
                 </BuyButton>
               </StyledTableCell>
             </StyledTableRow>

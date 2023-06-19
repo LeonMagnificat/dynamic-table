@@ -24,7 +24,7 @@ export default function TableData() {
               <CustomTableCell align="left">Publisher</CustomTableCell>
               <CustomTableCell align="left">Published Date</CustomTableCell>
               <CustomTableCell align="left">Maturity Rating</CustomTableCell>
-              <CustomTableCell align="left">Purchase</CustomTableCell>
+              <CustomTableCell align="left">More details</CustomTableCell>
             </TableRow>
           </TableHead>
           <TableRowItem />
