@@ -64,7 +64,7 @@ export const MainBox = styled(Box)({
 
 export const MainBoxContainer = styled(Container)({
   padding: "30px",
-  height: "100vh",
+  minHeight: "100vh",
   display: "flex",
   justifyContent: "center",
 });
