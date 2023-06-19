@@ -97,8 +97,17 @@ export default function TableRowItem() {
               <StyledTableCell align="left">
                 {book.volumeInfo.publishedDate}
               </StyledTableCell>
-              <StyledTableCell align="left">
-                {book.volumeInfo.maturityRating}
+              <StyledTableCell
+                align="left"
+                sx={{
+                  color:
+                    book.volumeInfo.maturityRating === "MATURE"
+                      ? "#e28a8a"
+                      : "#2aa198",
+                  textTransform: "capitalize",
+                }}
+              >
+                {book.volumeInfo.maturityRating.toLowerCase().replace("_", " ")}
               </StyledTableCell>
               <StyledTableCell align="left">
                 <BuyButton
