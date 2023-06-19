@@ -5,8 +5,7 @@
 .description {
     max-height: 150px;
     overflow: auto;
-    border-top: solid .3px gray;
-    border-bottom: solid .3px gray;
-    padding-bottom: 10px .3px gray;
-    padding-block: 30px,
+    border-top: solid .3px rgb(190, 190, 190);
+    border-bottom: solid .3px rgb(190, 190, 190);
+    padding-block: 60px,
 }
